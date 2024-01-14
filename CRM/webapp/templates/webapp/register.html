@@ -6,17 +6,18 @@
 {% block content %}
 <div class="row my-4 ">
     <div class="col-md-6 offset-md-3">
-        <div class="border p-3 bg-light">
+        <div class="border p-3 bg-secondary">
             <h4>Create an account</h4>
             <hr>
             
             <form method="POST" action="">
                 {% csrf_token %}
+                
                 {{ form|crispy }}
                 <button type="submit" class="btn btn-primary w-100 btn-block p-2"> Create account &nbsp; <i class="fa fa-user" aria-hidden="true"></i> </button>
                 
             <div class="text-center">
-              <p> Already have an account? </p> <a href=""> Login </a>
+              <p> Already have an account? </p> <a href="{% url 'login' %}"> Login </a>
             </div>
 
 
