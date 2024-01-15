@@ -4,6 +4,7 @@ from .forms import CreateUserForm, LoginForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
+from .models import Record
 # Create your views here.
 
 def index(request):
@@ -48,7 +49,11 @@ def login(request):
 #dashboard
 @login_required(login_url='login') #decorator
 def dashboard(request):
-    return render(request,'webapp/dashboard.html')
+    record = Record.objects.all()
+    context={
+        "records":record,
+        }
+    return render(request,'webapp/dashboard.html', context)
 
 
 
