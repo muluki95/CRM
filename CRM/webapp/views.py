@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import CreateUserForm, LoginForm
+from .forms import CreateUserForm, LoginForm, CreateRecordForm, UpdateRecordForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
@@ -54,6 +54,47 @@ def dashboard(request):
         "records":record,
         }
     return render(request,'webapp/dashboard.html', context)
+
+#create a record
+@login_required(login_url='login')
+def create_record(request):
+    form = CreateRecordForm()
+    if request.method=='POST':
+        form = CreateRecordForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("dashboard")
+    context = {
+        'form':form,
+        }
+    return render(request,'webapp/create-record.html',context)
+
+#update a record
+@login_required(login_url="login")
+def update_record(request,pk):
+    record = Record.objects.get(id=pk)
+    form = UpdateRecordForm(instance=record)
+    if request.method == 'POST':
+        form = UpdateRecordForm(instance=record, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect ('dashboard')
+        context ={
+            'form': form,
+            }
+    return render (request , 'webapp/update-record.html', context)
+
+#read or view a single record
+@login_required(login_url="login")
+def singular_record(request, pk):
+    all_records = Record.objects.get(id=pk)
+    context = {
+        'record':all_records,
+        }
+    return render(request,"webapp/view-record.html", context)
+
+
+    
 
 
 

@@ -1,0 +1,25 @@
+{% extends 'webapp/base.html' %}
+{% load crispy_forms_tags%}
+
+
+{% block content %}
+<div class="card" style="width: 18rem;">
+    
+    <div class="card-body">
+        <strong>
+            {{ record.first_name }}
+            {{ record.last_name }}
+        </strong>
+
+        <p class="card-text"> ID: <strong>{{record.id}}</p>
+        <p class="card-text"> EMAIL: <strong>{{record.email}}</p>
+        <p class="card-text"> PHONE: <strong>{{record.phone}}</p>
+        <p class="card-text"> STATE: <strong>{{record.state}}</p>
+        <p class="card-text"> CITY: <strong>{{record.city}}</p>
+        <p class="card-text"> COUNTRY: <strong>{{record.country}}</p>
+        <p class="card-text"> DATE: <strong>{{record.creation_date}}</p>
+
+    </div>
+  </div>
+
+{% endblock %}

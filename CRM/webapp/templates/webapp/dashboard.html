@@ -4,9 +4,9 @@
 {% block content %}
   <h5> Welcome {{ user }}!</h5>
   <hr>
-  <a class="btn btn-outline-primary btn-sm" href="{% url 'dashboard' %}"> Add a new record</a><hr>
+  <a class="btn btn-outline-primary btn-sm" href="{% url 'create-record' %}"> Add a new record</a><hr>
 
-  <table class="table table-light table-hover">
+  <table class="table table-hover table-bordered">
     <thead class="table-light">
         <tr>
             <th scope="col">ID</th>
@@ -37,6 +37,8 @@
             <td>{{record.city}}</td>
             <td>{{record.country}}</td>
             <td>{{ record.creation_date|date:"F j, Y" }}</td>
+
+            <td> <a href="{% url 'record' record.id %}"> Click to view record</a></td>
         </tr>
         {% endfor %}
      {% endif %}
