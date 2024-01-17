@@ -71,18 +71,21 @@ def create_record(request):
 
 #update a record
 @login_required(login_url="login")
-def update_record(request,pk):
+def update_record(request, pk):
     record = Record.objects.get(id=pk)
     form = UpdateRecordForm(instance=record)
+    context = {
+        'form': form,
+        }  # Define context outside the if block
+
     if request.method == 'POST':
         form = UpdateRecordForm(instance=record, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect ('dashboard')
-        context ={
-            'form': form,
-            }
-    return render (request , 'webapp/update-record.html', context)
+            return redirect('dashboard')
+
+    # Move the render function outside of the if block
+    return render(request, 'webapp/update-record.html', context)
 
 #read or view a single record
 @login_required(login_url="login")
@@ -92,6 +95,13 @@ def singular_record(request, pk):
         'record':all_records,
         }
     return render(request,"webapp/view-record.html", context)
+
+#delete a record
+@login_required(login_url="login")
+def delete_record(request, pk):
+    record = Record.objects.get(id=pk)
+    record.delete()
+    return redirect("dashboard")
 
 
     

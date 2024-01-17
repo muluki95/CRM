@@ -14,10 +14,10 @@
                 {% csrf_token %}
                 
                 {{ form|crispy }}
-                <button type="submit" class="btn btn-primary w-100 btn-block p-2"> Create account &nbsp; <i class="fa fa-user" aria-hidden="true"></i> </button>
+                <button type="submit" class="btn btn-primary w-100 btn-block p-2"> Create account &nbsp; <i class="fa-solid fa-user"></i> </button>
                 
             <div class="text-center">
-              <p> Already have an account? </p> <a href="{% url 'login' %}"> Login </a>
+              <p> Already have an account? </p> <a href="{% url 'login' %}" style="color: darkblue;"> Login &nbsp;  </a>
             </div>
 
 

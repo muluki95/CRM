@@ -10,6 +10,7 @@
             {{ record.first_name }}
             {{ record.last_name }}
         </strong>
+        <hr>
 
         <p class="card-text"> ID: <strong>{{record.id}}</p>
         <p class="card-text"> EMAIL: <strong>{{record.email}}</p>
@@ -21,5 +22,22 @@
 
     </div>
   </div>
+
+   <br>
+   <a href="{% url 'dashboard' %}" class="btn btn-secondary">Return</a>
+
+   &nbsp;
+
+   <a href="{% url 'update-record' pk=record.id %}" class="btn btn-info">Update Record</a>
+
+   
+   &nbsp;
+
+   <a href="{% url 'delete-record' pk=record.id %}" class="btn btn-danger">Delete Record</a>
+   
+   &nbsp;
+
+   
+  
 
 {% endblock %}
