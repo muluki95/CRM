@@ -6,14 +6,19 @@
 {% block content %}
 <div class="row my-4 ">
     <div class="col-md-6 offset-md-3">
-        <div class="border p-3 bg-secondary">
+        <div class="border p-3 bg-light">
             <h4>Create an account</h4>
             <hr>
             
             <form method="POST" action="">
                 {% csrf_token %}
                 
-                {{ form|crispy }}
+                {{form.username|as_crispy_field}}
+                <br>
+                {{form.password1|as_crispy_field}}
+                <br>
+                {{form.password2|as_crispy_field}}
+                <br>
                 <button type="submit" class="btn btn-primary w-100 btn-block p-2"> Create account &nbsp; <i class="fa-solid fa-user"></i> </button>
                 
             <div class="text-center">
