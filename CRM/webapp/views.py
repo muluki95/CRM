@@ -5,6 +5,7 @@ from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from .models import Record
+from django.contrib import messages
 # Create your views here.
 
 def index(request):
@@ -17,7 +18,9 @@ def register(request):
         form = CreateUserForm(request.POST) #create a form with the data passed in
         if form.is_valid(): #check to make sure all fields are filled out correctly
             form.save() 
-           
+
+        messages.success(request,"Account created successfully!")
+        
         return redirect('login')
     
     context = {
@@ -63,6 +66,9 @@ def create_record(request):
         form = CreateRecordForm(data=request.POST)
         if form.is_valid():
             form.save()
+
+            messages.success(request,"Your record was created!")
+
             return redirect("dashboard")
     context = {
         'form':form,
@@ -82,6 +88,9 @@ def update_record(request, pk):
         form = UpdateRecordForm(instance=record, data=request.POST)
         if form.is_valid():
             form.save()
+
+            messages.success(request,"Your record was updated!")
+
             return redirect('dashboard')
 
     # Move the render function outside of the if block
@@ -101,6 +110,8 @@ def singular_record(request, pk):
 def delete_record(request, pk):
     record = Record.objects.get(id=pk)
     record.delete()
+    messages.success(request,"Your record was deleted!") 
+
     return redirect("dashboard")
 
 
@@ -111,6 +122,8 @@ def delete_record(request, pk):
 #logout
 def logout(request):
     auth.logout(request)
+
+    messages.success(request,"Logged out successfully!")
     return redirect('/')
 
 
